@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="brand_blue">#2262FF</color>
+	<color name="brand_cyan">#33C8FF</color>
+	<color name="status_on">#3DE6A3</color>
+	<color name="status_off">#8A93B8</color>
+	<color name="power_off">#263568</color>
+	<color name="white">#FFFFFFFF</color>
+	<color name="text_secondary">#B7C5EE</color>
+	<color name="text_tertiary">#7F8CB6</color>
+</resources>
