@@ -9,10 +9,10 @@ android {
 
 	defaultConfig {
 		applicationId = "com.pikatak.pikaproxy"
-		minSdk = 21
+		minSdk = 24
 		targetSdk = 36
-		versionCode = 3
-		versionName = "1.1.1"
+		versionCode = 6
+		versionName = "1.4.0"
 
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 	}
@@ -43,10 +43,15 @@ android {
 		viewBinding = true
 		buildConfig = true
 	}
+	packaging {
+		jniLibs.useLegacyPackaging = true
+	}
 	buildToolsVersion = "36.0.0"
 }
 
 dependencies {
+	implementation(files("libs/libv2ray.aar"))
+	testImplementation("org.json:json:20240303")
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.appcompat)
 	implementation(libs.material)

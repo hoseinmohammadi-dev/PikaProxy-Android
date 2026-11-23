@@ -1,0 +1,7 @@
+<resources>
+<style name="Theme.PikaProxy" parent="Theme.Material3.Light.NoActionBar">
+<item name="colorPrimary">#064BFF</item><item name="colorOnPrimary">#FFFFFF</item>
+<item name="colorSurface">#FFFFFF</item><item name="colorOnSurface">#101A3B</item>
+<item name="android:windowLightStatusBar">true</item><item name="android:statusBarColor">#FCFDFF</item>
+<item name="android:navigationBarColor">#FCFDFF</item><item name="android:windowLightNavigationBar">true</item>
+<item name="android:fontFamily">sans-serif</item></style></resources>

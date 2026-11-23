@@ -12,14 +12,21 @@
 	<!-- Main Activity -->
 	<string name="about">%{app_name} %{version_name}\nLicense: %{license}\n<a href="%{home_url}">%{home_url}</a></string>
 	<string name="open_repo">View source</string>
-	<string name="connect">روشن کردن پراکسی</string>
-	<string name="disconnect">خاموش کردن پراکسی</string>
-	<string name="status_on">اتصال امن برقرار است</string>
-	<string name="status_off">اتصال خاموش است</string>
+	<string name="connect">اتصال</string>
+	<string name="disconnect">قطع اتصال</string>
+	<string name="status_on">اتصال روشن است</string>
+	<string name="status_off">آماده اتصال</string>
 	<string name="app_subtitle">اتصال امن سازمانی</string>
 	<string name="tap_to_connect">برای اتصال لمس کنید</string>
 	<string name="tap_to_disconnect">برای قطع اتصال لمس کنید</string>
-	<string name="company_wifi_only">فقط هنگام اتصال به شبکه داخلی شرکت استفاده شود</string>
+	<string name="company_wifi_only">سرور شرکت به شبکه داخلی نیاز دارد؛ کانفیگ شخصی از اینترنت گوشی استفاده می‌کند.</string>
+	<string name="server_settings">انتخاب سرور</string>
+	<string name="server_host">آدرس IPv4 سرور</string>
+	<string name="server_port">پورت HTTP</string>
+	<string name="server_linux">سرور جدید</string>
+	<string name="server_legacy">سرور قبلی</string>
+	<string name="server_settings_hint">برای تغییر سرور، ابتدا اتصال را خاموش کنید. انتخاب شما هنگام اتصال ذخیره می‌شود.</string>
+	<string name="invalid_proxy_endpoint">آدرس IPv4 معتبر و پورت بین ۱ تا ۶۵۵۳۵ وارد کنید.</string>
 	<string name="notification_channel">وضعیت اتصال پراکسی</string>
 	<string name="notification_title">Pika Proxy روشن است</string>
 	<string name="notification_text">ترافیک برنامه‌ها از اتصال امن عبور می‌کند</string>
@@ -96,4 +103,6 @@
 	<string name="search_domains_message">One domain in each line. Use \"#\" for comments.</string>
 	<string name="invalid_search_domains">Ensure that the domains are valid.</string>
 
+	<string name="test_ping">تست پینگ</string>
+	<string name="manage_servers">مدیریت سرورها</string>
 </resources>

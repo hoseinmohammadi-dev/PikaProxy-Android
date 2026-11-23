@@ -6,6 +6,24 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 
 object Pref {
+	private const val PROXY_HOST = "proxy_host"
+	private const val PROXY_PORT = "proxy_port"
+
+	fun loadProxyEndpoint(context: Context): ProxyEndpoint {
+		val prefs = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
+		return ProxyEndpoint.parse(
+			prefs.getString(PROXY_HOST, ProxyEndpoint.DEFAULT.host) ?: "",
+			prefs.getInt(PROXY_PORT, ProxyEndpoint.DEFAULT.port).toString()
+		) ?: ProxyEndpoint.DEFAULT
+	}
+
+	fun storeProxyEndpoint(context: Context, endpoint: ProxyEndpoint) {
+		PreferenceManager.getDefaultSharedPreferences(context.applicationContext).edit {
+			putString(PROXY_HOST, endpoint.host)
+			putInt(PROXY_PORT, endpoint.port)
+		}
+	}
+
 	const val REDIRECT_RULE = "redirect_rule"
 	const val ENABLE_IPV6 = "enable_ipv6"
 	const val VPN_ADDRESSES = "vpn_addresses"

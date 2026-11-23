@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:id="@+id/root_view" android:layout_width="match_parent" android:layout_height="match_parent"
-	android:background="@drawable/bg_app" android:paddingStart="28dp" android:paddingEnd="28dp">
-	<ImageView android:id="@+id/logo_view" android:layout_width="104dp" android:layout_height="104dp"
-		android:layout_marginTop="72dp" android:background="@drawable/bg_logo_card" android:clipToOutline="true"
-		android:contentDescription="@string/app_name" android:scaleType="fitCenter"
-		android:src="@drawable/pika_logo" app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
-	<TextView android:id="@+id/app_title" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_marginTop="16dp" android:fontFamily="sans-serif-medium" android:text="@string/app_name"
-		android:textColor="@color/white" android:textSize="28sp" app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/logo_view" />
-	<TextView android:id="@+id/app_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_marginTop="6dp" android:text="@string/app_subtitle" android:textColor="@color/text_secondary"
-		android:textSize="14sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/app_title" />
-	<FrameLayout android:id="@+id/power_container" android:layout_width="220dp" android:layout_height="220dp"
-		android:layout_marginTop="42dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/app_subtitle">
-		<View android:id="@+id/pulse_ring" android:layout_width="184dp" android:layout_height="184dp"
-			android:layout_gravity="center" android:alpha="0" android:background="@drawable/bg_pulse_ring" />
-		<com.google.android.material.button.MaterialButton android:id="@+id/toggle_button"
-			style="@style/Widget.Material3.Button" android:layout_width="154dp" android:layout_height="154dp"
-			android:layout_gravity="center" android:contentDescription="@string/connect" android:elevation="16dp"
-			android:insetLeft="0dp" android:insetTop="0dp" android:insetRight="0dp" android:insetBottom="0dp"
-			android:text="" app:backgroundTint="@color/power_off" app:cornerRadius="77dp" app:icon="@drawable/ic_power"
-			app:iconGravity="textStart" app:iconPadding="0dp" app:iconSize="58dp" app:iconTint="@color/white" />
-	</FrameLayout>
-	<LinearLayout android:id="@+id/status_container" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:gravity="center_vertical" android:orientation="horizontal" app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/power_container">
-		<View android:id="@+id/status_dot" android:layout_width="9dp" android:layout_height="9dp" android:background="@drawable/bg_status_dot" />
-		<TextView android:id="@+id/status_text" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:layout_marginStart="10dp" android:fontFamily="sans-serif-medium" android:text="@string/status_off"
-			android:textColor="@color/white" android:textSize="17sp" />
-	</LinearLayout>
-	<TextView android:id="@+id/action_hint" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_marginTop="12dp" android:text="@string/tap_to_connect" android:textColor="@color/text_secondary"
-		android:textSize="13sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/status_container" />
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="28dp"
-		android:gravity="center" android:text="@string/company_wifi_only" android:textColor="@color/text_tertiary"
-		android:textSize="12sp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+ android:id="@+id/root_view" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@drawable/bg_app">
+ <androidx.core.widget.NestedScrollView android:id="@+id/home_scroll" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_horizontal" android:padding="16dp">
+  <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginTop="12dp" android:orientation="horizontal">
+   <ImageView android:id="@+id/logo_view" android:layout_width="62dp" android:layout_height="62dp" android:src="@drawable/pika_logo" android:contentDescription="@string/app_name"/>
+   <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="12dp">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pika Proxy" android:textSize="28sp" android:textStyle="bold" android:textColor="@color/ink"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/app_subtitle" android:textSize="16sp" android:textColor="@color/text_secondary"/>
+   </LinearLayout>
+  </LinearLayout>
+  <FrameLayout android:layout_width="190dp" android:layout_height="190dp" android:layout_marginTop="16dp">
+   <View android:id="@+id/pulse_ring" android:layout_width="190dp" android:layout_height="190dp" android:background="@drawable/bg_power_glow"/>
+   <ImageButton android:id="@+id/power_button" android:layout_width="150dp" android:layout_height="150dp" android:layout_gravity="center" android:background="@drawable/bg_power_ring" android:padding="48dp" android:src="@drawable/ic_power" android:contentDescription="@string/connect"/>
+  </FrameLayout>
+  <LinearLayout android:layout_width="wrap_content" android:layout_height="34dp" android:gravity="center" android:orientation="horizontal" android:paddingStart="24dp" android:paddingEnd="24dp" android:background="@drawable/bg_status_pill">
+   <TextView android:id="@+id/status_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/status_off" android:textColor="@color/text_secondary" android:textSize="15sp"/>
+   <View android:id="@+id/status_dot" android:layout_width="9dp" android:layout_height="9dp" android:layout_marginStart="8dp" android:background="@drawable/bg_status_dot"/>
+  </LinearLayout>
+  <TextView android:id="@+id/action_hint" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/tap_to_connect" android:textColor="@color/text_secondary" android:textSize="14sp"/>
+  <com.google.android.material.button.MaterialButton android:id="@+id/toggle_button" android:layout_width="match_parent" android:layout_height="56dp" android:layout_marginTop="10dp" android:text="@string/connect" android:textSize="19sp" android:textStyle="bold" android:textColor="@color/white" app:backgroundTint="@color/brand_blue" app:cornerRadius="28dp"/>
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:orientation="vertical" android:padding="14dp" android:background="@drawable/bg_server_settings">
+   <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="right">
+     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="سرور انتخاب‌شده" android:textSize="12sp" android:textColor="@color/text_secondary"/>
+     <TextView android:id="@+id/selected_server_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="right" android:textColor="@color/ink" android:textSize="17sp" android:textStyle="bold" android:layout_marginTop="4dp"/>
+     <TextView android:id="@+id/selected_server" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="right" android:textColor="@color/ink" android:textSize="15sp" android:layout_marginTop="4dp"/>
+    </LinearLayout>
+    <ImageView android:layout_width="44dp" android:layout_height="44dp" android:layout_marginStart="16dp" android:padding="10dp" android:background="@drawable/bg_nav_selected" android:src="@drawable/ic_server" android:contentDescription="@null" app:tint="@color/brand_blue"/>
+   </LinearLayout>
+   <TextView android:id="@+id/ping_text" android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:layout_marginTop="6dp" android:textSize="12sp" android:textColor="@color/text_secondary" android:accessibilityLiveRegion="polite"/>
+   <com.google.android.material.button.MaterialButton android:id="@+id/ping_button" android:layout_width="match_parent" android:layout_height="44dp" android:text="@string/test_ping" android:textColor="@color/ink" app:backgroundTint="#E2EEFF" app:strokeColor="#CADEFF" app:strokeWidth="1dp" app:cornerRadius="12dp" app:icon="@drawable/ic_ping" app:iconGravity="textEnd" app:iconTint="@color/brand_blue"/>
+   <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginTop="4dp" android:background="#DEE6F2"/>
+   <com.google.android.material.button.MaterialButton android:id="@+id/settings_button" android:layout_width="match_parent" android:layout_height="48dp" android:text="@string/manage_servers" android:textColor="@color/ink" app:backgroundTint="@android:color/transparent" app:icon="@drawable/ic_server" app:iconGravity="textEnd" app:iconTint="@color/ink"/>
+  </LinearLayout>
+  <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="42dp" android:layout_marginTop="12dp" android:gravity="center" android:padding="8dp" android:background="@drawable/bg_info" android:text="برای سرور شرکت به شبکه داخلی متصل شوید" android:textColor="@color/text_secondary" android:textSize="12sp" android:drawableEnd="@drawable/ic_info" android:drawablePadding="8dp"/>
+ </LinearLayout>
+ </androidx.core.widget.NestedScrollView>
+ <LinearLayout android:layout_width="match_parent" android:layout_height="68dp" android:orientation="horizontal" android:padding="6dp" android:background="@drawable/bg_server_settings">
+ <LinearLayout android:id="@+id/preferences_tab" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:clickable="true" android:focusable="true" android:contentDescription="تنظیمات" >
+ <ImageView android:layout_width="23dp" android:layout_height="23dp" android:src="@drawable/ic_settings" android:contentDescription="@null" app:tint="@color/text_secondary"/>
+ <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="تنظیمات" android:textColor="@color/text_secondary" android:textSize="12sp" android:layout_marginTop="2dp"/></LinearLayout><LinearLayout android:id="@+id/servers_tab" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:clickable="true" android:focusable="true" android:contentDescription="سرورها" >
+ <ImageView android:layout_width="23dp" android:layout_height="23dp" android:src="@drawable/ic_server" android:contentDescription="@null" app:tint="@color/text_secondary"/>
+ <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="سرورها" android:textColor="@color/text_secondary" android:textSize="12sp" android:layout_marginTop="2dp"/></LinearLayout><LinearLayout android:id="@+id/home_tab" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:clickable="true" android:focusable="true" android:contentDescription="خانه" android:background="@drawable/bg_nav_selected">
+ <ImageView android:layout_width="23dp" android:layout_height="23dp" android:src="@drawable/ic_home" android:contentDescription="@null" app:tint="@color/brand_blue"/>
+ <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="خانه" android:textColor="@color/brand_blue" android:textSize="12sp" android:layout_marginTop="2dp"/></LinearLayout>
+ </LinearLayout>
+</LinearLayout>

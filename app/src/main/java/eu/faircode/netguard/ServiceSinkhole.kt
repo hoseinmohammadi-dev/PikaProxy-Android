@@ -86,7 +86,7 @@ class ServiceSinkhole(val service: MyVpnService) {
 
 		return when {
 			// Public TCP is wrapped in HTTP CONNECT by the native engine.
-			protocol == "tcp" -> Allowed(MyVpnService.PROXY_HOST, MyVpnService.PROXY_PORT)
+			protocol == "tcp" -> Allowed(service.proxyEndpoint.host, service.proxyEndpoint.port)
 			// HTTP proxies cannot carry UDP. DNS stays usable; other public UDP is
 			// blocked so browsers fall back from QUIC to proxied TCP.
 			protocol == "udp" && packet.dport == 53 -> Allowed()
@@ -97,7 +97,7 @@ class ServiceSinkhole(val service: MyVpnService) {
 	private fun isLocalAddress(address: String): Boolean = try {
 		InetAddress.getByName(address).let {
 			it.isAnyLocalAddress || it.isLoopbackAddress || it.isLinkLocalAddress ||
-				it.isSiteLocalAddress || it.isMulticastAddress || address == MyVpnService.PROXY_HOST
+				it.isSiteLocalAddress || it.isMulticastAddress || address == service.proxyEndpoint.host
 		}
 	} catch (_: Exception) {
 		false

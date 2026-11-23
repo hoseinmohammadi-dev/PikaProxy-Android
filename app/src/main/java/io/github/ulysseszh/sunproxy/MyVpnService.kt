@@ -28,8 +28,6 @@ class MyVpnService : VpnService() {
 		private const val ACTION_STOP = "stop"
 		private const val CHANNEL_ID = "pika_proxy_connection"
 		private const val NOTIFICATION_ID = 2080
-		const val PROXY_HOST = "192.168.1.65"
-		const val PROXY_PORT = 2080
 
 		init {
 			System.loadLibrary("netguard")
@@ -54,6 +52,9 @@ class MyVpnService : VpnService() {
 	private val netguard: ServiceSinkhole = ServiceSinkhole(this);
 
 	private var tunnelThread: Thread? = null
+	private var personalCore: libv2ray.CoreController? = null
+	var proxyEndpoint: ProxyEndpoint = ProxyEndpoint.DEFAULT
+		private set
 	private var vpn: ParcelFileDescriptor? = null
 	private var hosts: List<Triple<Regex, String, Int>>? = null
 	private var redirectRule: RedirectRule? = null
@@ -71,6 +72,10 @@ class MyVpnService : VpnService() {
 	}
 
 	private fun start() {
+		if (vpn != null) return
+		val selected = ServerProfiles.selected(applicationContext)
+		proxyEndpoint = selected.endpoint()
+		if (selected.personal) personalCore = CoreEngine.start(applicationContext, selected.link)
 		hosts = Pref.loadHosts(applicationContext)
 		redirectRule = Pref.loadRedirectRule(applicationContext)
 		if (vpn != null) {
@@ -81,6 +86,7 @@ class MyVpnService : VpnService() {
 			throw IllegalStateException(getString(R.string.msg_start_failed))
 		}
 		startNative(vpn!!)
+		ServerProfiles.markActive(this, true)
 	}
 
 	private fun stop() {
@@ -89,6 +95,9 @@ class MyVpnService : VpnService() {
 			stopVpn(it)
 			vpn = null
 		}
+		runCatching { personalCore?.stopLoop() }
+		personalCore = null
+		ServerProfiles.markActive(this, false)
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 			stopForeground(STOP_FOREGROUND_REMOVE)
 		} else {
@@ -220,6 +229,7 @@ class MyVpnService : VpnService() {
 	}
 
 	override fun onCreate() {
+		ServerProfiles.markActive(this, false)
 		if (jni_context != 0L) {
 			Log.w(TAG, "Create with context=$jni_context")
 			netguard.jni_stop(jni_context)
@@ -242,7 +252,8 @@ class MyVpnService : VpnService() {
 				try {
 					start()
 				} catch (error: Throwable) {
-					Log.e(TAG, "Unable to start proxy", error)
+					Log.e(TAG, "Unable to start proxy: ${error.javaClass.simpleName}")
+					android.widget.Toast.makeText(this, "اتصال شروع نشد؛ تنظیمات و در دسترس بودن سرور را بررسی کنید.", android.widget.Toast.LENGTH_LONG).show()
 					stop()
 				}
 			}
@@ -286,6 +297,9 @@ class MyVpnService : VpnService() {
 	}
 
 	override fun onDestroy() {
+		runCatching { personalCore?.stopLoop() }
+		personalCore = null
+		ServerProfiles.markActive(this, false)
 		synchronized(this) {
 			Log.i(TAG, "Destroy")
 			try {
